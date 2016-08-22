@@ -1,5 +1,6 @@
 # I edited this makefile to make it work after the new software updates. Original by Emil Valkov (robidouille.wordpress.com).
-OBJS = objs 
+#OBJS = objs 
+OBJS = objs
 
 CFLAGS_OPENCV = -I/usr/include/opencv
 LDFLAGS2_OPENCV = -lopencv_highgui -lopencv_core -lopencv_legacy -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_imgproc -lpthread -lm
@@ -35,10 +36,11 @@ RASPICAMCV_OBJS = \
 	$(OBJS)/RaspiCLI.o \
 	$(OBJS)/RaspiCamCV.o \
 
-RASPICAMTEST_OBJS = \
-	$(OBJS)/RaspiCamTest.o \
+# RASPICAMTEST_OBJS = \
+#	$(OBJS)/RaspiCamTest.o \
 
-TARGETS = libraspicamcv.a raspicamtest
+# TARGETS = libraspicamcv.a raspicamtest
+TARGETS = libraspicamcv.a
 
 all: $(TARGETS)
 
@@ -51,8 +53,8 @@ $(OBJS)/%.o: $(USERLAND_ROOT)/host_applications/linux/apps/raspicam/%.c
 libraspicamcv.a: $(RASPICAMCV_OBJS)
 	ar rcs libraspicamcv.a -o $+
 
-raspicamtest: $(RASPICAMTEST_OBJS) libraspicamcv.a
-	gcc $(LDFLAGS) $+ $(LDFLAGS2) -L. -lraspicamcv -o $@
+# raspicamtest: $(RASPICAMTEST_OBJS) libraspicamcv.a
+#	gcc $(LDFLAGS) $+ $(LDFLAGS2) -L. -lraspicamcv -o $@
 
 clean:
 	rm -f $(OBJS)/* $(TARGETS)
